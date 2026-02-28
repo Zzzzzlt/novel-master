@@ -1,0 +1,98 @@
+{
+  "app": {
+    "title": "Novel Master"
+  },
+  "sidebar": {
+    "newStory": "New Story",
+    "import": "Import",
+    "backup": "Backup",
+    "exportNovel": "Export Novel (.md)",
+    "settings": "Settings"
+  },
+  "settings": {
+    "title": "Configuration",
+    "apiKey": "API Key",
+    "maxMessages": "Max Rendered Messages",
+    "msgOptionAll": "All (Caution: May be slow)",
+    "msgOption10": "Last 10 Messages",
+    "msgOption20": "Last 20 Messages",
+    "msgOption50": "Last 50 Messages",
+    "msgOption100": "Last 100 Messages",
+    "showReasoning": "Show Reasoning Process",
+    "showReasoningDesc": "Display the model's thinking process when using DeepSeek Reasoner.",
+    "developerMode": "Developer Mode",
+    "developerModeDesc": "Enables manual map instruction injection and debug tools.",
+    "language": "Language",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "chat": {
+    "noStory": "No Story Selected",
+    "openSidebar": "Open Sidebar",
+    "readyToWrite": "Ready to Write?",
+    "settingMode": "Setting",
+    "storyMode": "Story",
+    "thinking": "Thinking...",
+    "scrollTop": "Scroll to Top",
+    "prevMsg": "Previous Message",
+    "scrollBottom": "Scroll to Bottom",
+    "placeholder": "Message Novel Master... (Type / to reference)",
+    "enterSend": "Enter to send, Shift + Enter for new line",
+    "enterLineMobile": "Enter for new line",
+    "reference": "Reference a Bookmark",
+    "noBookmarks": "No bookmarks found.",
+    "polish": "Polish (Runse)",
+    "stop": "Stop Generation",
+    "send": "Send"
+  },
+  "rightPanel": {
+    "memoryConfig": "Memory Config",
+    "memoryRounds": "Memory Rounds (N)",
+    "fastCreation": "Fast Creation",
+    "autoSync": "Auto-Sync Map",
+    "aiSuggestions": "Ai Suggestions",
+    "guidance": "Optional: Provide guidance...",
+    "generate": "Generate Suggestions",
+    "regenerate": "Regenerate Suggestions",
+    "plotSummary": "Plot Summary",
+    "characterList": "Character List",
+    "longTermMemory": "Long Term Memory",
+    "novelSetting": "Novel Setting",
+    "neuralMap": "Neural Map View",
+    "openMap": "Open Map Interface",
+    "updateMap": "Update from Story",
+    "context": "Context",
+    "mapView": "Map View"
+  },
+  "dialog": {
+    "importError": "Import Error",
+    "invalidFormat": "Invalid session file format.",
+    "parseError": "Failed to parse the file. Please ensure it is a valid JSON.",
+    "deleteTitle": "Delete Message",
+    "deleteDesc": "Are you sure you want to delete this message? This action cannot be undone and may affect the branch history.",
+    "delete": "Delete",
+    "apiRequired": "API Key Required",
+    "apiDesc": "You need to configure your API Key in the Settings to use AI features.",
+    "openSettings": "Open Settings",
+    "pendingConflicts": "Pending Conflicts",
+    "conflictsDesc": "Please resolve all conflicts (Character or Record overlaps) before sending a new message.",
+    "analysisError": "Analysis Error",
+    "analysisDesc": "Failed to parse the record response from AI.",
+    "connectionFailed": "Connection Failed",
+    "connectionDesc": "Analysis failed:",
+    "generationError": "Generation Error",
+    "polishFailed": "Polish Failed",
+    "suggestionFailed": "Suggestion Failed",
+    "mapUpdateFailed": "Map Update Failed",
+    "selectSession": "Select a session to view."
+  },
+  "bookmark": {
+    "chapter": "Chapter",
+    "setting": "Setting Section"
+  }
+}
