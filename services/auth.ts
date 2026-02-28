@@ -38,6 +38,9 @@ const localAdminPass = import.meta.env.VITE_ADMIN_PASS || '';
 const localNormalUser = import.meta.env.VITE_NORMAL_USER || '';
 const localNormalPass = import.meta.env.VITE_NORMAL_PASS || '';
 
+// 管理员邮箱列表（从环境变量读取，逗号分隔）
+const adminEmails = (import.meta.env.VITE_ADMIN_EMAILS || '').split(',').map(e => e.trim().toLowerCase()).filter(e => e);
+
 export const TEST_USERS: Record<string, { password: string; username: string; role: UserRole }> = localAdminUser && localAdminPass ? {
   [localAdminUser]: {
     password: localAdminPass,
@@ -101,8 +104,23 @@ class AuthService {
 
   // 处理 Netlify 登录
   private handleNetlifyLogin(user: any): void {
-    // 从用户元数据获取角色，默认普通用户
-    const role: UserRole = user.user_metadata?.role === 'admin' ? 'admin' : 'user';
+    // 从用户元数据或 app_metadata 获取角色
+    // Netlify Identity 角色可能在 user_metadata.role 或 app_metadata.role
+    let roleStr = user.user_metadata?.role || user.app_metadata?.role || 'user';
+
+    // 如果环境变量中配置了管理员邮箱，则该邮箱自动获得管理员权限
+    const userEmail = (user.email || '').toLowerCase();
+    if (adminEmails.includes(userEmail)) {
+      roleStr = 'admin';
+    }
+
+    const role: UserRole = roleStr === 'admin' ? 'admin' : 'user';
+
+    console.log('[Auth] Netlify user metadata:', user.user_metadata);
+    console.log('[Auth] Netlify app metadata:', user.app_metadata);
+    console.log('[Auth] Admin emails configured:', adminEmails);
+    console.log('[Auth] User email:', userEmail);
+    console.log('[Auth] Detected role:', role);
 
     this.currentUser = {
       id: user.id,
