@@ -7,9 +7,21 @@ import { AppMode, ModelType, ModelParameters } from '../types';
 
 // DeepSeek API 配置
 // API Key 从环境变量读取，部署到 Netlify 后在 Netlify 控制台设置
+
+// 获取 API Key 的函数（支持运行时动态获取）
+export function getApiKey(): string {
+  // 优先使用环境变量
+  if (import.meta.env.VITE_DEEPSEEK_API_KEY) {
+    return import.meta.env.VITE_DEEPSEEK_API_KEY;
+  }
+  // 备选：从 window 对象读取（用于运行时设置）
+  return (window as any).__DEEPSEEK_API_KEY__ || '';
+}
+
 export const AI_CONFIG = {
-  // 从环境变量读取 API Key，本地开发可使用 .env.local 文件
-  apiKey: import.meta.env.VITE_DEEPSEEK_API_KEY || '',
+  get apiKey() {
+    return getApiKey();
+  },
   baseUrl: 'https://api.deepseek.com',
   defaultModel: 'deepseek-chat',
 };

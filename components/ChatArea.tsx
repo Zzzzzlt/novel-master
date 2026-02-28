@@ -581,7 +581,9 @@ export const ChatArea: React.FC = () => {
   }, []);
 
   const checkApiKey = useCallback(() => {
-      if (!settings.apiKey) {
+      // 优先使用设置中的 API Key，如果没有则使用环境变量
+      const apiKey = settings.apiKey || import.meta.env.VITE_DEEPSEEK_API_KEY;
+      if (!apiKey) {
           openDialog({
               title: t('dialog.apiRequired'),
               description: t('dialog.apiDesc'),
