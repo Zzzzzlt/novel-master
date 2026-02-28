@@ -178,10 +178,26 @@ export const AuthButton: React.FC = () => {
     return unsubscribe;
   }, []);
 
+  const handleClick = () => {
+    if (user) {
+      // 已登录，显示对话框（可以退出登录）
+      setShowDialog(true);
+    } else {
+      // 未登录，直接打开 Netlify Identity 登录框
+      const netlifyIdentity = (window as any).netlifyIdentity;
+      if (netlifyIdentity) {
+        netlifyIdentity.open();
+      } else {
+        // 备选：显示自定义登录框
+        setShowDialog(true);
+      }
+    }
+  };
+
   return (
     <>
       <button
-        onClick={() => setShowDialog(true)}
+        onClick={handleClick}
         className="flex flex-col items-center gap-1 px-3 py-1.5 text-sm rounded-md hover:bg-muted transition-colors w-full"
         title={user ? `${user.username} (${user.role})` : '登录'}
       >
