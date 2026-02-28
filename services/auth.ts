@@ -14,7 +14,7 @@ import netlifyIdentity from 'netlify-identity-widget';
 
 // Netlify Identity 配置
 // 部署到 Netlify 后，替换为你的站点 URL（如：https://your-site.netlify.app）
-const NETLIFY_IDENTITY_URL = 'http://localhost:8888'; // 本地开发使用
+const NETLIFY_IDENTITY_URL = 'https://novel-master.netlify.app';
 
 // 用户角色类型
 export type UserRole = 'admin' | 'user';
