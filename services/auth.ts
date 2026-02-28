@@ -356,11 +356,27 @@ class AuthService {
   // 打开登录对话框
   openLogin(): void {
     try {
-      netlifyIdentity.open();
+      // 尝试使用导入的模块
+      if (netlifyIdentity) {
+        netlifyIdentity.open();
+        return;
+      }
     } catch (error) {
-      // 本地模式不需要打开对话框
-      console.log('[Auth] Local mode - login handled programmatically');
+      console.warn('[Auth] Module import failed, trying window');
     }
+
+    // 尝试使用全局对象（index.html 已加载脚本）
+    try {
+      const netlifyIdentityWindow = (window as any).netlifyIdentity;
+      if (netlifyIdentityWindow) {
+        netlifyIdentityWindow.open();
+        return;
+      }
+    } catch (error) {
+      console.error('[Auth] Window method failed:', error);
+    }
+
+    console.error('[Auth] Unable to open Netlify Identity login');
   }
 }
 

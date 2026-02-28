@@ -28,9 +28,18 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({ isOpen, onClose }) => {
     setError('');
     setLoading(true);
 
-    // 直接打开 Netlify Identity 登录
+    // 直接打开 Netlify Identity 登录框
     try {
-      // 使用 authService 的 openLogin 方法
+      // 优先使用全局对象
+      const netlifyIdentity = (window as any).netlifyIdentity;
+      if (netlifyIdentity) {
+        netlifyIdentity.open();
+        onClose();
+        setLoading(false);
+        return;
+      }
+
+      // 备选：使用 authService
       authService.openLogin();
       onClose();
     } catch (err) {
