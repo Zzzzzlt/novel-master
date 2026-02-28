@@ -28,12 +28,19 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({ isOpen, onClose }) => {
     setError('');
     setLoading(true);
 
-    const result = await authService.login(email, password);
-
-    if (result.success) {
+    // 直接打开 Netlify Identity 登录
+    try {
+      const netlifyIdentity = await import('netlify-identity-widget');
+      netlifyIdentity.default.open();
       onClose();
-    } else {
-      setError(result.error || '登录失败');
+    } catch (err) {
+      // 如果失败，使用本地登录
+      const result = await authService.login(email, password);
+      if (result.success) {
+        onClose();
+      } else {
+        setError(result.error || '登录失败');
+      }
     }
 
     setLoading(false);
