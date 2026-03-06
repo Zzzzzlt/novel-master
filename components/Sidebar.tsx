@@ -23,9 +23,7 @@ export const Sidebar: React.FC = () => {
     setSettings,
     mobileSidebarOpen,
     toggleMobileSidebar,
-    openDialog,
-    showSettings,
-    setShowSettings
+    openDialog
   } = useStore();
 
   // Local state for settings form inputs, synced when modal opens
