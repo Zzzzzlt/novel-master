@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小说大师 - 帮助文档</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+      --border: #e2e8f0;
+      --border-dark: #cbd5e1;
+      --text: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .sidebar-header {
+      padding: 0 1.5rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+    .sidebar-header h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .sidebar-header p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+    .sidebar-nav {
+      padding: 0 0.75rem;
+    }
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.625rem 0.75rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      border-radius: 6px;
+      transition: all 0.15s;
+      margin-bottom: 2px;
+    }
+    .sidebar-nav a:hover {
+      background: var(--border);
+      color: var(--text);
+    }
+    .sidebar-nav a.active {
+      background: var(--text);
+      color: white;
+    }
+    .sidebar-nav a svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+    .lang-switch {
+      padding: 1rem 1.5rem 0;
+      display: flex;
+      gap: 0.5rem;
+      border-top: 1px solid var(--border);
+      margin-top: 1rem;
+      padding-top: 1rem;
+    }
+    .lang-switch a {
+      padding: 0.375rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .lang-switch a.active {
+      background: var(--text);
+      border-color: var(--text);
+      color: white;
+    }
+
+    /* Main Content */
+    .main {
+      flex: 1;
+      padding: 2rem 3rem;
+      max-width: 900px;
+    }
+    header {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid var(--text);
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    header .subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+    section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 2rem;
+    }
+    section h2 {
+      font-size: 1.375rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
+    section h2 svg {
+      width: 22px;
+      height: 22px;
+    }
+    section h3 {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem;
+      color: var(--text);
+    }
+    p {
+      margin-bottom: 0.875rem;
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+    }
+    .tip-box {
+      background: var(--bg-tertiary);
+      border-left: 3px solid var(--text);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .tip-box h4 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+    .tip-box p {
+      margin: 0;
+      font-size: 0.875rem;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .feature-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .feature-card h4 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text);
+    }
+    .feature-card h4 svg {
+      width: 18px;
+      height: 18px;
+      color: var(--text-secondary);
+    }
+    .feature-card p {
+      font-size: 0.8125rem;
+      margin: 0;
+    }
+    .mode-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+    @media (max-width: 640px) {
+      .mode-section { grid-template-columns: 1fr; }
+    }
+    .mode-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .mode-header {
+      background: var(--text);
+      color: white;
+      padding: 0.75rem 1rem;
+      font-weight: 600;
+      font-size: 0.9375rem;
+    }
+    .mode-header.setting { background: #475569; }
+    .mode-content {
+      padding: 1rem;
+    }
+    .mode-content ul {
+      list-style: none;
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+    }
+    .mode-content li {
+      padding: 0.375rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+    .mode-content li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+    }
+    .message-actions {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+    .action-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+    }
+    .action-table th, .action-table td {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .action-table th {
+      background: var(--bg-tertiary);
+      font-weight: 600;
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+    .action-table tr:last-child td { border-bottom: none; }
+    .action-table td:first-child {
+      width: 50px;
+      text-align: center;
+    }
+    .action-table svg {
+      width: 18px;
+      height: 18px;
+      color: var(--text-secondary);
+    }
+    .action-table code {
+      background: var(--bg-tertiary);
+      padding: 0.125rem 0.375rem;
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 0.6875rem;
+    }
+    ul {
+      list-style: disc;
+      padding-left: 1.5rem;
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+    }
+    ul li {
+      padding: 0.375rem 0;
+    }
+    ul strong {
+      color: var(--text);
+    }
+    .map-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .map-section h4 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    .tag {
+      display: inline-block;
+      background: var(--bg-tertiary);
+      padding: 0.25rem 0.625rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      border: 1px solid var(--border);
+      margin-right: 0.5rem;
+      margin-bottom: 0.375rem;
+      color: var(--text-secondary);
+    }
+    .settings-list {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+    .settings-item {
+      padding: 0.875rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+    }
+    .settings-item:last-child { border-bottom: none; }
+    .settings-item .name { font-weight: 500; color: var(--text); }
+    .settings-item .desc { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.125rem; }
+    .shortcuts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.625rem;
+      margin-top: 1rem;
+    }
+    .shortcut {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8125rem;
+    }
+    .shortcut code {
+      background: var(--bg-tertiary);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.75rem;
+      border: 1px solid var(--border);
+    }
+    .canvas-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+    .canvas-section h4 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    .canvas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+    .canvas-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+    }
+    .canvas-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    a { color: var(--text); text-decoration: underline; }
+    a:hover { color: var(--text-secondary); }
+    @media (max-width: 768px) {
+      .layout { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--border); }
+      .main { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1>小说大师</h1>
+        <p>帮助文档</p>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#overview" class="active"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>概述</a>
+        <a href="#sidebar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>侧边栏</a>
+        <a href="#modes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><path d="m18.4 5.6-2.1 2.1"/><path d="M21 12h-3"/><path d="m18.4 18.4-2.1-2.1"/><path d="M12 21v-3"/><path d="m5.6 5.6 2.1 2.1"/><path d="M3 12h3"/><path d="m5.6 18.4 2.1-2.1"/></svg>创作模式</a>
+        <a href="#messages"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>消息操作</a>
+        <a href="#canvas"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>画布模式</a>
+        <a href="#rightpanel"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>右侧面板</a>
+        <a href="#map"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>地图功能</a>
+        <a href="#settings"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>设置项</a>
+        <a href="#shortcuts"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.001"/><path d="M10 8h.001"/><path d="M14 8h.001"/><path d="M18 8h.001"/><path d="M8 12h.001"/><path d="M12 12h.001"/><path d="M16 12h.001"/><path d="M7 16h10"/></svg>快捷键</a>
+      </nav>
+      <div class="lang-switch">
+        <a href="/help.html" class="active">中文</a>
+        <a href="/help-en.html">English</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header>
+        <h1>帮助文档</h1>
+        <p class="subtitle">小说大师 v1.0 - AI 辅助小说创作工具</p>
+      </header>
+
+      <section id="overview">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>概述</h2>
+        <p>小说大师是一款基于 AI 的小说创作辅助工具，支持设定管理、故事写作、角色分析、情节记录和可视化地图等功能。</p>
+
+        <div class="tip-box">
+          <h4>快速开始</h4>
+          <p>1. 在设置中输入 DeepSeek API 密钥 → 2. 在设定模式中创建世界观和角色 → 3. 切换到故事模式开始写作 → 4. 使用记录功能更新情节概要</p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><path d="m18.4 5.6-2.1 2.1"/><path d="M21 12h-3"/><path d="m18.4 18.4-2.1-2.1"/><path d="M12 21v-3"/><path d="m5.6 5.6 2.1 2.1"/><path d="M3 12h3"/><path d="m5.6 18.4 2.1-2.1"/></svg>双模式创作</h4>
+            <p>设定模式用于构建世界观，故事模式用于写作正文。</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>智能记忆</h4>
+            <p>AI 自动记忆情节概要、角色设定和重要事件。</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>可视化地图</h4>
+            <p>交互式地图编辑器，展示场景和故事脉络。</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>分支管理</h4>
+            <p>支持故事分支，可在不同剧情线之间切换。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="sidebar">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>侧边栏功能</h2>
+        <p>侧边栏提供会话管理和基础设置功能。</p>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>新建故事</h4>
+            <p>创建新的写作会话，自动切换到设定模式。</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>导入</h4>
+            <p>从 JSON 文件导入会话备份。</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>备份</h4>
+            <p>导出会话为 JSON 文件。</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>导出小说</h4>
+            <p>将故事正文导出为 Markdown 格式。</p>
+          </div>
+        </div>
+
+        <h3>会话管理</h3>
+        <ul>
+          <li>点击会话名称切换到该会话</li>
+          <li>双击或点击编辑图标重命名会话</li>
+          <li>点击删除图标删除会话</li>
+        </ul>
+      </section>
+
+      <section id="modes">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><path d="m18.4 5.6-2.1 2.1"/><path d="M21 12h-3"/><path d="m18.4 18.4-2.1-2.1"/><path d="M12 21v-3"/><path d="m5.6 5.6 2.1 2.1"/><path d="M3 12h3"/><path d="m5.6 18.4 2.1-2.1"/></svg>创作模式</h2>
+        <p>顶部模式切换按钮允许在设定模式和故事模式之间切换。</p>
+
+        <div class="mode-section">
+          <div class="mode-card">
+            <div class="mode-header setting">设定模式</div>
+            <div class="mode-content">
+              <p style="margin-bottom: 0.75rem; font-size: 0.8125rem; color: var(--text-muted);">用于创建小说的基础设定。</p>
+              <ul>
+                <li>创建世界观设定和大纲</li>
+                <li>设计角色设定和关系</li>
+                <li>定义故事背景和规则</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mode-card">
+            <div class="mode-header">故事模式</div>
+            <div class="mode-content">
+              <p style="margin-bottom: 0.75rem; font-size: 0.8125rem; color: var(--text-muted);">用于写作小说正文内容。</p>
+              <ul>
+                <li>写作故事正文</li>
+                <li>对话和场景描写</li>
+                <li>情节发展和推进</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <h4>提示</h4>
+          <p>点击消息旁的「添加到设定」按钮（BookPlus 图标），可将内容添加到世界观设定。添加后会自动切换到故事模式。</p>
+        </div>
+      </section>
+
+      <section id="messages">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>消息操作</h2>
+        <p>鼠标悬停到消息上会显示操作按钮栏。</p>
+
+        <div class="message-actions">
+          <table class="action-table">
+            <thead>
+              <tr>
+                <th>图标</th>
+                <th>功能</th>
+                <th>说明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></td>
+                <td>复制</td>
+                <td>复制消息内容到剪贴板</td>
+              </tr>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></td>
+                <td>收藏</td>
+                <td>标记重要章节</td>
+              </tr>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></td>
+                <td>重新生成</td>
+                <td>重新请求 AI 生成</td>
+              </tr>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></td>
+                <td>编辑</td>
+                <td>修改消息内容</td>
+              </tr>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></td>
+                <td>画布模式</td>
+                <td>全屏展开查看</td>
+              </tr>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg></td>
+                <td>分支</td>
+                <td>创建新的故事分支</td>
+              </tr>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></td>
+                <td>添加到设定</td>
+                <td>仅设定模式可见，将内容加入世界观设定</td>
+              </tr>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></td>
+                <td>分析记录</td>
+                <td>仅故事模式可见，分析并记录到记忆</td>
+              </tr>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></td>
+                <td>删除</td>
+                <td>删除该消息</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>分支导航</h3>
+        <p>当消息存在分支时，会显示分支导航器（如 1/3），点击箭头在分支间切换。可以同时保留多条剧情线。</p>
+
+        <h3>输入框技巧</h3>
+        <ul>
+          <li>输入 <code>/</code> 引用书签内容</li>
+          <li>Enter 发送消息，Shift+Enter 换行</li>
+          <li>手机端默认 Enter 换行</li>
+        </ul>
+      </section>
+
+      <section id="canvas">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>画布模式</h2>
+        <p>画布模式提供全屏沉浸式的消息编辑和查看体验。点击消息旁的展开图标即可进入。</p>
+
+        <div class="canvas-section">
+          <h4>主要功能</h4>
+          <div class="canvas-grid">
+            <div class="canvas-item">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+              <span>编辑消息内容</span>
+            </div>
+            <div class="canvas-item">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+              <span>添加新段落</span>
+            </div>
+            <div class="canvas-item">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+              <span>字数统计</span>
+            </div>
+            <div class="canvas-item">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+              <span>Markdown 支持</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="canvas-section">
+          <h4>编辑操作</h4>
+          <ul style="margin-top: 0.75rem;">
+            <li><strong>Ctrl/Cmd + S</strong>：保存编辑内容</li>
+            <li><strong>Ctrl/Cmd + Enter</strong>：保存并发送给 AI</li>
+            <li><strong>Esc</strong>：取消编辑，关闭画布</li>
+            <li><strong>Tab</strong>：在段落间切换焦点</li>
+          </ul>
+        </div>
+
+        <div class="tip-box">
+          <h4>使用场景</h4>
+          <p>画布模式特别适合需要编辑较长内容时使用，例如修改 AI 生成的故事大纲、调整章节结构或润色对话内容。</p>
+        </div>
+      </section>
+
+      <section id="rightpanel">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>右侧面板</h2>
+        <p>右侧面板提供上下文记忆、AI 建议和地图功能，通过顶部标签页切换。</p>
+
+        <h3>上下文标签页</h3>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>记忆配置</h4>
+            <p>记忆轮数控制 AI 参考的历史消息数量。开启快速创作后，生成内容会自动记录分析。</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m6.8 15-3.5 2"/><path d="m20.7 17-3.5-2"/><path d="M6.8 9 3.3 7"/><path d="m20.7 7-3.5 2"/><circle cx="12" cy="12" r="4"/></svg>AI 建议</h4>
+            <p>输入指导内容获取剧情建议，点击建议可插入到输入框。</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>情节概要</h4>
+            <p>记录故事主线和重要事件。</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>角色列表</h4>
+            <p>以卡片形式展示角色设定。</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>长期记忆</h4>
+            <p>记录重要细节和伏笔。</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>世界观设定</h4>
+            <p>展示所有设定内容。</p>
+          </div>
+        </div>
+
+        <h3>地图标签页</h3>
+        <div class="map-section">
+          <h4>神经网络视图</h4>
+          <p>故事地图的缩略预览，点击「打开地图界面」进入全屏编辑模式。</p>
+          <p style="margin-top: 0.5rem;"><strong>自动同步：</strong>开启后 AI 生成的内容会自动更新地图。<br><strong>从故事更新：</strong>手动触发 AI 分析并更新地图。</p>
+        </div>
+      </section>
+
+      <section id="map">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>地图可视化</h2>
+        <p>交互式地图编辑器，用于可视化故事场景和角色关系。可以创建世界、区域和节点，形成完整的故事世界。</p>
+
+        <h3>层级结构</h3>
+        <div>
+          <span class="tag">世界 (World)</span>
+          <span class="tag">区域 (Region)</span>
+          <span class="tag">节点 (Node)</span>
+        </div>
+
+        <h3>节点类型</h3>
+        <div>
+          <span class="tag">房间</span>
+          <span class="tag">地标</span>
+          <span class="tag">传送点</span>
+          <span class="tag">未知</span>
+        </div>
+
+        <h3>连接类型</h3>
+        <div>
+          <span class="tag">道路</span>
+          <span class="tag">门</span>
+          <span class="tag">传送门</span>
+          <span class="tag">楼梯</span>
+        </div>
+
+        <h3>画布操作</h3>
+        <div class="map-section">
+          <ul style="margin-top: 0;">
+            <li><strong>右键画布</strong>：打开创建菜单，可创建新节点、区域或世界</li>
+            <li><strong>拖拽节点</strong>：移动节点到任意位置</li>
+            <li><strong>连接端口</strong>：从节点的边缘端口拖拽到另一个节点建立连接</li>
+            <li><strong>滚轮缩放</strong>：放大或缩小视图</li>
+            <li><strong>中键/Alt+拖拽</strong>：平移整个视图</li>
+            <li><strong>Delete 键</strong>：删除选中的节点或连接</li>
+            <li><strong>点击空白处</strong>：取消选择</li>
+          </ul>
+        </div>
+
+        <div class="tip-box">
+          <h4>Z 轴连接</h4>
+          <p>节点顶部的三角形端口用于垂直连接（如楼梯、电梯），表示楼层切换。虚线表示模糊或不确定的连接关系。</p>
+        </div>
+
+        <h3>开发者模式</h3>
+        <p>开启开发者模式后，可以手动注入地图指令，直接通过自然语言描述来创建和修改地图结构。</p>
+      </section>
+
+      <section id="settings">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>设置项</h2>
+
+        <div class="settings-list">
+          <div class="settings-item">
+            <div>
+              <div class="name">API 密钥</div>
+              <div class="desc">DeepSeek API 密钥（必填）</div>
+            </div>
+            <span class="tag">必填</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">正文模式模型</div>
+              <div class="desc">选择使用 Chat 模型或 Reasoner 模型</div>
+            </div>
+            <span class="tag">deepseek-chat</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">Temperature</div>
+              <div class="desc">控制生成随机性，值越高越随机</div>
+            </div>
+            <span class="tag">0-2</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">Top P</div>
+              <div class="desc">核采样参数，控制候选词范围</div>
+            </div>
+            <span class="tag">0-1</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">Presence Penalty</div>
+              <div class="desc">鼓励引入新话题</div>
+            </div>
+            <span class="tag">-2 到 2</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">Frequency Penalty</div>
+              <div class="desc">减少词汇重复</div>
+            </div>
+            <span class="tag">-2 到 2</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">Max Tokens</div>
+              <div class="desc">单次生成的最大 token 数</div>
+            </div>
+            <span class="tag">4096-16384</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">最大渲染消息数</div>
+              <div class="desc">控制显示的历史消息数量，避免性能问题</div>
+            </div>
+            <span class="tag">0-100</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">显示推理过程</div>
+              <div class="desc">使用 Reasoner 模型时显示思考过程</div>
+            </div>
+            <span class="tag">开关</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">开发者模式</div>
+              <div class="desc">启用手动地图指令注入和调试工具</div>
+            </div>
+            <span class="tag">开关</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">语言</div>
+              <div class="desc">界面显示语言</div>
+            </div>
+            <span class="tag">中文/English</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="shortcuts">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.001"/><path d="M10 8h.001"/><path d="M14 8h.001"/><path d="M18 8h.001"/><path d="M8 12h.001"/><path d="M12 12h.001"/><path d="M16 12h.001"/><path d="M7 16h10"/></svg>快捷键</h2>
+
+        <div class="shortcuts">
+          <div class="shortcut">
+            <span>Enter</span>
+            <code>发送</code>
+          </div>
+          <div class="shortcut">
+            <span>Shift + Enter</span>
+            <code>换行</code>
+          </div>
+          <div class="shortcut">
+            <span>Ctrl/Cmd + Enter</span>
+            <code>保存发送</code>
+          </div>
+          <div class="shortcut">
+            <span>/</span>
+            <code>引用书签</code>
+          </div>
+          <div class="shortcut">
+            <span>Delete</span>
+            <code>删除</code>
+          </div>
+          <div class="shortcut">
+            <span>滚轮</span>
+            <code>缩放</code>
+          </div>
+          <div class="shortcut">
+            <span>中键/Alt + 拖拽</span>
+            <code>平移</code>
+          </div>
+          <div class="shortcut">
+            <span>Esc</span>
+            <code>取消/关闭</code>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p>小说大师 v1.0 | 基于 DeepSeek API 构建 | <a href="https://platform.deepseek.com" target="_blank">获取 API</a></p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Highlight active nav on scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (window.scrollY >= sectionTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

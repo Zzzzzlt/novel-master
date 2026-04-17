@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novel Master - Help Documentation</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+      --border: #e2e8f0;
+      --border-dark: #cbd5e1;
+      --text: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .sidebar-header {
+      padding: 0 1.5rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+    .sidebar-header h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .sidebar-header p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+    .sidebar-nav {
+      padding: 0 0.75rem;
+    }
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.625rem 0.75rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      border-radius: 6px;
+      transition: all 0.15s;
+      margin-bottom: 2px;
+    }
+    .sidebar-nav a:hover {
+      background: var(--border);
+      color: var(--text);
+    }
+    .sidebar-nav a.active {
+      background: var(--text);
+      color: white;
+    }
+    .sidebar-nav a svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+    .lang-switch {
+      padding: 1rem 1.5rem 0;
+      display: flex;
+      gap: 0.5rem;
+      border-top: 1px solid var(--border);
+      margin-top: 1rem;
+      padding-top: 1rem;
+    }
+    .lang-switch a {
+      padding: 0.375rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .lang-switch a.active {
+      background: var(--text);
+      border-color: var(--text);
+      color: white;
+    }
+
+    /* Main Content */
+    .main {
+      flex: 1;
+      padding: 2rem 3rem;
+      max-width: 900px;
+    }
+    header {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid var(--text);
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    header .subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+    section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 2rem;
+    }
+    section h2 {
+      font-size: 1.375rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
+    section h2 svg {
+      width: 22px;
+      height: 22px;
+    }
+    section h3 {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem;
+      color: var(--text);
+    }
+    p {
+      margin-bottom: 0.875rem;
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+    }
+    .tip-box {
+      background: var(--bg-tertiary);
+      border-left: 3px solid var(--text);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .tip-box h4 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+    .tip-box p {
+      margin: 0;
+      font-size: 0.875rem;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .feature-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .feature-card h4 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text);
+    }
+    .feature-card h4 svg {
+      width: 18px;
+      height: 18px;
+      color: var(--text-secondary);
+    }
+    .feature-card p {
+      font-size: 0.8125rem;
+      margin: 0;
+    }
+    .mode-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+    @media (max-width: 640px) {
+      .mode-section { grid-template-columns: 1fr; }
+    }
+    .mode-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .mode-header {
+      background: var(--text);
+      color: white;
+      padding: 0.75rem 1rem;
+      font-weight: 600;
+      font-size: 0.9375rem;
+    }
+    .mode-header.setting { background: #475569; }
+    .mode-content {
+      padding: 1rem;
+    }
+    .mode-content ul {
+      list-style: none;
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+    }
+    .mode-content li {
+      padding: 0.375rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+    .mode-content li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+    }
+    .message-actions {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+    .action-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+    }
+    .action-table th, .action-table td {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .action-table th {
+      background: var(--bg-tertiary);
+      font-weight: 600;
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+    .action-table tr:last-child td { border-bottom: none; }
+    .action-table td:first-child {
+      width: 50px;
+      text-align: center;
+    }
+    .action-table svg {
+      width: 18px;
+      height: 18px;
+      color: var(--text-secondary);
+    }
+    .action-table code {
+      background: var(--bg-tertiary);
+      padding: 0.125rem 0.375rem;
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 0.6875rem;
+    }
+    ul {
+      list-style: disc;
+      padding-left: 1.5rem;
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+    }
+    ul li {
+      padding: 0.375rem 0;
+    }
+    ul strong {
+      color: var(--text);
+    }
+    .map-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .map-section h4 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    .tag {
+      display: inline-block;
+      background: var(--bg-tertiary);
+      padding: 0.25rem 0.625rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      border: 1px solid var(--border);
+      margin-right: 0.5rem;
+      margin-bottom: 0.375rem;
+      color: var(--text-secondary);
+    }
+    .settings-list {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+    .settings-item {
+      padding: 0.875rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+    }
+    .settings-item:last-child { border-bottom: none; }
+    .settings-item .name { font-weight: 500; color: var(--text); }
+    .settings-item .desc { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.125rem; }
+    .shortcuts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.625rem;
+      margin-top: 1rem;
+    }
+    .shortcut {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8125rem;
+    }
+    .shortcut code {
+      background: var(--bg-tertiary);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.75rem;
+      border: 1px solid var(--border);
+    }
+    .canvas-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+    .canvas-section h4 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    .canvas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+    .canvas-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+    }
+    .canvas-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    a { color: var(--text); text-decoration: underline; }
+    a:hover { color: var(--text-secondary); }
+    @media (max-width: 768px) {
+      .layout { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--border); }
+      .main { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1>Novel Master</h1>
+        <p>Help Documentation</p>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#overview" class="active"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Overview</a>
+        <a href="#sidebar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>Sidebar</a>
+        <a href="#modes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><path d="m18.4 5.6-2.1 2.1"/><path d="M21 12h-3"/><path d="m18.4 18.4-2.1-2.1"/><path d="M12 21v-3"/><path d="m5.6 5.6 2.1 2.1"/><path d="M3 12h3"/><path d="m5.6 18.4 2.1-2.1"/></svg>Modes</a>
+        <a href="#messages"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Messages</a>
+        <a href="#canvas"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>Canvas</a>
+        <a href="#rightpanel"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>Right Panel</a>
+        <a href="#map"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Map</a>
+        <a href="#settings"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>Settings</a>
+        <a href="#shortcuts"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.001"/><path d="M10 8h.001"/><path d="M14 8h.001"/><path d="M18 8h.001"/><path d="M8 12h.001"/><path d="M12 12h.001"/><path d="M16 12h.001"/><path d="M7 16h10"/></svg>Shortcuts</a>
+      </nav>
+      <div class="lang-switch">
+        <a href="/help.html">中文</a>
+        <a href="/help-en.html" class="active">English</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header>
+        <h1>Help Documentation</h1>
+        <p class="subtitle">Novel Master v1.0 - AI-Powered Novel Writing Assistant</p>
+      </header>
+
+      <section id="overview">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Overview</h2>
+        <p>Novel Master is an AI-powered novel writing assistant that supports setting management, story writing, character analysis, plot recording, and visual map features.</p>
+
+        <div class="tip-box">
+          <h4>Quick Start</h4>
+          <p>1. Enter your DeepSeek API key in Settings → 2. Create world settings in Setting mode → 3. Switch to Story mode to start writing → 4. Use Record to update plot summary</p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><path d="m18.4 5.6-2.1 2.1"/><path d="M21 12h-3"/><path d="m18.4 18.4-2.1-2.1"/><path d="M12 21v-3"/><path d="m5.6 5.6 2.1 2.1"/><path d="M3 12h3"/><path d="m5.6 18.4 2.1-2.1"/></svg>Dual Mode Writing</h4>
+            <p>Setting mode for world-building, Story mode for narrative writing.</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>Smart Memory</h4>
+            <p>AI automatically remembers plot, characters, and important events.</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Visual Maps</h4>
+            <p>Interactive map editor for scenes and story flow.</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>Branch Management</h4>
+            <p>Support for story branches - explore different plotlines.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="sidebar">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>Sidebar Features</h2>
+        <p>The sidebar provides session management and basic settings.</p>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>New Story</h4>
+            <p>Create a new writing session in Setting mode.</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>Import</h4>
+            <p>Import session backups from JSON files.</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>Backup</h4>
+            <p>Export sessions as JSON files.</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>Export Novel</h4>
+            <p>Export story content as Markdown format.</p>
+          </div>
+        </div>
+
+        <h3>Session Management</h3>
+        <ul>
+          <li>Click session name to switch sessions</li>
+          <li>Double-click or click edit icon to rename</li>
+          <li>Click delete icon to remove session</li>
+        </ul>
+      </section>
+
+      <section id="modes">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><path d="m18.4 5.6-2.1 2.1"/><path d="M21 12h-3"/><path d="m18.4 18.4-2.1-2.1"/><path d="M12 21v-3"/><path d="m5.6 5.6 2.1 2.1"/><path d="M3 12h3"/><path d="m5.6 18.4 2.1-2.1"/></svg>Writing Modes</h2>
+        <p>The mode toggle at the top allows switching between Setting and Story modes.</p>
+
+        <div class="mode-section">
+          <div class="mode-card">
+            <div class="mode-header setting">Setting Mode</div>
+            <div class="mode-content">
+              <p style="margin-bottom: 0.75rem; font-size: 0.8125rem; color: var(--text-muted);">For creating fundamental story settings.</p>
+              <ul>
+                <li>Create world settings and outlines</li>
+                <li>Design character profiles</li>
+                <li>Define story background and rules</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mode-card">
+            <div class="mode-header">Story Mode</div>
+            <div class="mode-content">
+              <p style="margin-bottom: 0.75rem; font-size: 0.8125rem; color: var(--text-muted);">For writing the main narrative content.</p>
+              <ul>
+                <li>Write story narrative</li>
+                <li>Dialogue and scene description</li>
+                <li>Plot development</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <h4>Tip</h4>
+          <p>Click the "Add to Setting" button (BookPlus icon) next to a message to add it to world settings. It will automatically switch to Story mode afterward.</p>
+        </div>
+      </section>
+
+      <section id="messages">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Message Actions</h2>
+        <p>Hover over messages to reveal the action toolbar.</p>
+
+        <div class="message-actions">
+          <table class="action-table">
+            <thead>
+              <tr>
+                <th>Icon</th>
+                <th>Action</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></td>
+                <td>Copy</td>
+                <td>Copy message to clipboard</td>
+              </tr>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></td>
+                <td>Bookmark</td>
+                <td>Mark important chapters</td>
+              </tr>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></td>
+                <td>Regenerate</td>
+                <td>Request AI to regenerate</td>
+              </tr>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></td>
+                <td>Edit</td>
+                <td>Modify message content</td>
+              </tr>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></td>
+                <td>Canvas</td>
+                <td>Fullscreen view</td>
+              </tr>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg></td>
+                <td>Branch</td>
+                <td>Create new story branch</td>
+              </tr>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></td>
+                <td>Add to Setting</td>
+                <td>Only in Setting mode, add content to world settings</td>
+              </tr>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></td>
+                <td>Analyze</td>
+                <td>Only in Story mode, analyze and record to memory</td>
+              </tr>
+              <tr>
+                <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></td>
+                <td>Delete</td>
+                <td>Delete this message</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Branch Navigation</h3>
+        <p>When a message has branches, a navigator (e.g., 1/3) appears. Click arrows to switch between branches. You can keep multiple plotlines simultaneously.</p>
+
+        <h3>Input Tips</h3>
+        <ul>
+          <li>Type <code>/</code> to reference bookmarked content</li>
+          <li>Enter to send, Shift+Enter for new line</li>
+          <li>On mobile, Enter creates new line by default</li>
+        </ul>
+      </section>
+
+      <section id="canvas">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>Canvas Mode</h2>
+        <p>Canvas mode provides a fullscreen immersive message editing and viewing experience. Click the expand icon next to a message to enter.</p>
+
+        <div class="canvas-section">
+          <h4>Main Features</h4>
+          <div class="canvas-grid">
+            <div class="canvas-item">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+              <span>Edit message content</span>
+            </div>
+            <div class="canvas-item">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+              <span>Add new paragraphs</span>
+            </div>
+            <div class="canvas-item">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+              <span>Word count</span>
+            </div>
+            <div class="canvas-item">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+              <span>Markdown support</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="canvas-section">
+          <h4>Editing Operations</h4>
+          <ul style="margin-top: 0.75rem;">
+            <li><strong>Ctrl/Cmd + S</strong>: Save edited content</li>
+            <li><strong>Ctrl/Cmd + Enter</strong>: Save and send to AI</li>
+            <li><strong>Esc</strong>: Cancel editing, close canvas</li>
+            <li><strong>Tab</strong>: Switch focus between paragraphs</li>
+          </ul>
+        </div>
+
+        <div class="tip-box">
+          <h4>Use Cases</h4>
+          <p>Canvas mode is especially useful when editing longer content, such as modifying AI-generated story outlines, adjusting chapter structure, or polishing dialogue.</p>
+        </div>
+      </section>
+
+      <section id="rightpanel">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>Right Panel</h2>
+        <p>The right panel provides context memory, AI suggestions, and map features, switchable via tabs at the top.</p>
+
+        <h3>Context Tab</h3>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>Memory Config</h4>
+            <p>Memory Rounds controls AI reference history. Fast Creation auto-analyzes after generation.</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m6.8 15-3.5 2"/><path d="m20.7 17-3.5-2"/><path d="M6.8 9 3.3 7"/><path d="m20.7 7-3.5 2"/><circle cx="12" cy="12" r="4"/></svg>AI Suggestions</h4>
+            <p>Enter guidance to get plot suggestions. Click to insert into input.</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>Plot Summary</h4>
+            <p>Records main plot and important events.</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Character List</h4>
+            <p>Displays character profiles as cards.</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>Long-term Memory</h4>
+            <p>Records important details and foreshadowing.</p>
+          </div>
+          <div class="feature-card">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>World Settings</h4>
+            <p>Displays all setting content.</p>
+          </div>
+        </div>
+
+        <h3>Map Tab</h3>
+        <div class="map-section">
+          <h4>Neural Map View</h4>
+          <p>Thumbnail preview of the story map. Click "Open Map" for fullscreen editing.</p>
+          <p style="margin-top: 0.5rem;"><strong>Auto-Sync:</strong> AI content auto-updates map.<br><strong>Update from Story:</strong> Manually trigger AI to analyze and update.</p>
+        </div>
+      </section>
+
+      <section id="map">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Map Visualization</h2>
+        <p>Interactive map editor for visualizing story scenes and character relationships. Create worlds, regions, and nodes to form a complete story world.</p>
+
+        <h3>Hierarchy</h3>
+        <div>
+          <span class="tag">World</span>
+          <span class="tag">Region</span>
+          <span class="tag">Node</span>
+        </div>
+
+        <h3>Node Types</h3>
+        <div>
+          <span class="tag">Room</span>
+          <span class="tag">Landmark</span>
+          <span class="tag">Transit</span>
+          <span class="tag">Unknown</span>
+        </div>
+
+        <h3>Connection Types</h3>
+        <div>
+          <span class="tag">Road</span>
+          <span class="tag">Door</span>
+          <span class="tag">Portal</span>
+          <span class="tag">Stairs</span>
+        </div>
+
+        <h3>Canvas Operations</h3>
+        <div class="map-section">
+          <ul style="margin-top: 0;">
+            <li><strong>Right-click canvas</strong>: Open creation menu to create new nodes, regions, or worlds</li>
+            <li><strong>Drag node</strong>: Move node to any position</li>
+            <li><strong>Connect ports</strong>: Drag from one node's edge port to another to establish connection</li>
+            <li><strong>Scroll wheel</strong>: Zoom in or out</li>
+            <li><strong>Middle-click / Alt+drag</strong>: Pan the entire view</li>
+            <li><strong>Delete key</strong>: Delete selected nodes or connections</li>
+            <li><strong>Click empty area</strong>: Deselect</li>
+          </ul>
+        </div>
+
+        <div class="tip-box">
+          <h4>Z-Axis Connections</h4>
+          <p>Triangle ports at the top of nodes are for vertical connections (like stairs, elevators), representing floor transitions. Dashed lines indicate vague or uncertain connections.</p>
+        </div>
+
+        <h3>Developer Mode</h3>
+        <p>Enabling Developer Mode allows manual map instruction injection, directly creating and modifying map structures through natural language descriptions.</p>
+      </section>
+
+      <section id="settings">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>Settings</h2>
+
+        <div class="settings-list">
+          <div class="settings-item">
+            <div>
+              <div class="name">API Key</div>
+              <div class="desc">DeepSeek API key (Required)</div>
+            </div>
+            <span class="tag">Required</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">Body Mode Model</div>
+              <div class="desc">Choose between Chat or Reasoner model</div>
+            </div>
+            <span class="tag">deepseek-chat</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">Temperature</div>
+              <div class="desc">Controls randomness, higher values are more random</div>
+            </div>
+            <span class="tag">0-2</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">Top P</div>
+              <div class="desc">Nucleus sampling parameter</div>
+            </div>
+            <span class="tag">0-1</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">Presence Penalty</div>
+              <div class="desc">Encourages new topics</div>
+            </div>
+            <span class="tag">-2 to 2</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">Frequency Penalty</div>
+              <div class="desc">Reduces word repetition</div>
+            </div>
+            <span class="tag">-2 to 2</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">Max Tokens</div>
+              <div class="desc">Maximum tokens per generation</div>
+            </div>
+            <span class="tag">4096-16384</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">Max Rendered Messages</div>
+              <div class="desc">Controls displayed history count</div>
+            </div>
+            <span class="tag">0-100</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">Show Reasoning</div>
+              <div class="desc">Display Reasoner thinking process</div>
+            </div>
+            <span class="tag">Toggle</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">Developer Mode</div>
+              <div class="desc">Enable manual map injection and debug tools</div>
+            </div>
+            <span class="tag">Toggle</span>
+          </div>
+          <div class="settings-item">
+            <div>
+              <div class="name">Language</div>
+              <div class="desc">Interface display language</div>
+            </div>
+            <span class="tag">中文/English</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="shortcuts">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.001"/><path d="M10 8h.001"/><path d="M14 8h.001"/><path d="M18 8h.001"/><path d="M8 12h.001"/><path d="M12 12h.001"/><path d="M16 12h.001"/><path d="M7 16h10"/></svg>Shortcuts</h2>
+
+        <div class="shortcuts">
+          <div class="shortcut">
+            <span>Enter</span>
+            <code>Send</code>
+          </div>
+          <div class="shortcut">
+            <span>Shift + Enter</span>
+            <code>New line</code>
+          </div>
+          <div class="shortcut">
+            <span>Ctrl/Cmd + Enter</span>
+            <code>Save & Send</code>
+          </div>
+          <div class="shortcut">
+            <span>/</span>
+            <code>Bookmark</code>
+          </div>
+          <div class="shortcut">
+            <span>Delete</span>
+            <code>Delete</code>
+          </div>
+          <div class="shortcut">
+            <span>Scroll</span>
+            <code>Zoom</code>
+          </div>
+          <div class="shortcut">
+            <span>Middle-click / Alt+drag</span>
+            <code>Pan</code>
+          </div>
+          <div class="shortcut">
+            <span>Esc</span>
+            <code>Cancel/Close</code>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p>Novel Master v1.0 | Built on DeepSeek API | <a href="https://platform.deepseek.com" target="_blank">Get API</a></p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Highlight active nav on scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (window.scrollY >= sectionTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
